@@ -14,37 +14,6 @@ class _AdminState extends State<Admin> {
   //boxCard , favoris , card, articleRecent ,
   @override
   Widget build(BuildContext context) {
-    final forum = [
-      Carte(
-        titre: "Cours et TD",
-        couleur: Colors.black,
-        taille: 0.45,
-        contenu: "Questions sur les cours et exercices",
-        icon: Icons.school,
-      ),
-      Carte(
-        titre: "Projets",
-        couleur: Colors.black,
-        taille: 0.45,
-        contenu: "Collaboration sur les projets",
-        icon: Icons.electric_bike,
-      ),
-      Carte(
-        titre: "Carrière",
-        couleur: Colors.black,
-        taille: 0.45,
-        contenu: "Stages et opportunités professionnelles",
-        icon: Icons.badge,
-      ),
-      Carte(
-        titre: "Général",
-        couleur: Colors.black,
-        taille: 0.45,
-        contenu: "Discussion diverses",
-        icon: Icons.people,
-      ),
-    ];
-
     final acces_rapide = [
       Carte(
         titre: "Gérer utilisateurs",
@@ -111,31 +80,6 @@ class _AdminState extends State<Admin> {
         contenu: "Documents/mois",
       ),
     ];
-
-    final events = [
-      Event(
-        date: "10 Déc. 2023",
-        duree: "14H-16h",
-        titre: "Session de Tutorat de Mathématiques",
-        couleur: Colors.blue,
-        lieu: "salle fs13",
-        organisateur: "organisé par le Club Informatique CI",
-        contenu:
-            "Session de révision pour préparer l'examen de fin de semestsre . Apportez vos exercices!",
-      ),
-
-      Event(
-        date: "24 Jan 2026",
-        duree: "20h-23h",
-        titre: "Masterclass en Intelligence Artificielle",
-        lieu: "CCOS",
-        contenu:
-            "CI présente une masterclass en intelligence artificielle, venez nombreux accompagné de vos amis passioné en IA et en science de données",
-        organisateur: "organisé par CI",
-        couleur: Colors.red,
-      ),
-    ];
-
     // tableau pour les résultats matiere note et statut
 
     final List<Resultat> res = [
@@ -153,6 +97,30 @@ class _AdminState extends State<Admin> {
         nom: "Abdou Ndiaye",
         email: "ndiaye.abdou@gmail.com",
         type: "Administration",
+      ),
+    ];
+
+    final List<Formation> formation = [
+      Formation(
+        etudiant: 250,
+        formation: "Licence informatique",
+        ufr: "UFR SAT",
+        niveau: "L1,L2,L3",
+        statut: "Active",
+      ),
+      Formation(
+        formation: "licence mathématique",
+        ufr: "UFR SAT",
+        niveau: "L1,L2,L3",
+        etudiant: 196,
+        statut: "Active",
+      ),
+      Formation(
+        formation: "Licence physique",
+        ufr: "UFR SAT",
+        niveau: "L1,L2,L2",
+        etudiant: 123,
+        statut: "Active",
       ),
     ];
 
@@ -451,10 +419,58 @@ class _AdminState extends State<Admin> {
                           ),
                         ),
                       ),
-                      gestionUser(
+                      gestionFormation(
                         formation,
                         "Formations disponilbes",
                         "Nouvelle formation",
+                      ),
+                      SizedBox(height: 8),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8),
+                        child: Text(
+                          "Calendrier académique",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+
+                      Card(
+                        elevation: 4,
+                        color: Colors.white,
+                        child: Container(
+                          child: Column(
+                            children: [
+                              iconColorText(
+                                "Année 2023-2024",
+                                Color(0xFF2C3E50),
+                                Icons.calendar_view_week_sharp,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(vertical: 3),
+                                child: Text(
+                                  "Rentrée universitaires",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(vertical: 4),
+                                child: Text(
+                                  "15 octobre 2023",
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    color: Color.fromARGB(193, 43, 42, 42),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -515,6 +531,53 @@ class _AdminState extends State<Admin> {
               Icons.account_circle_rounded,
             ),
             tableau(res),
+            Container(
+              padding: EdgeInsets.only(top: 8),
+              alignment: Alignment.bottomRight,
+              child: Container(
+                width: 180,
+                height: 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  gradient: LinearGradient(
+                    colors: [Color(0xFFE74C3C), Color(0xFFF39C12)],
+                  ),
+                ),
+                alignment: Alignment.center,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    backgroundColor: Colors.transparent,
+                  ),
+                  onPressed: () {},
+                  child: Text(
+                    labelButton,
+                    style: TextStyle(fontSize: 14, color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget gestionFormation(final res, String labelText, String labelButton) {
+    return Card(
+      color: Colors.white,
+      elevation: 4,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        child: Column(
+          children: [
+            iconColorText(
+              labelText,
+              Color(0xFF2ECC71),
+              Icons.account_circle_rounded,
+            ),
+            SizedBox(height: 8),
+            tableauFormation(res),
             Container(
               padding: EdgeInsets.only(top: 8),
               alignment: Alignment.bottomRight,
@@ -1410,7 +1473,7 @@ class _AdminState extends State<Admin> {
     );
   }
 
-  Widget emploiTemps(final shedule) {
+  Widget tableauFormation(final result) {
     return Table(
       border: TableBorder(
         horizontalInside: BorderSide(color: Color(0xFFEEEEEE), width: 1),
@@ -1425,7 +1488,7 @@ class _AdminState extends State<Admin> {
             Padding(
               padding: EdgeInsets.symmetric(vertical: 15, horizontal: 8),
               child: Text(
-                "Jour",
+                "Formation",
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
@@ -1435,6 +1498,140 @@ class _AdminState extends State<Admin> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+              child: Text(
+                "UFR",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+              child: Text(
+                "Niveau",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+              child: Text(
+                "Etudiants",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+              child: Text(
+                "Statut",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ],
+        ),
+        for (final r in result)
+          TableRow(
+            decoration: BoxDecoration(color: Colors.white),
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+                child: Text(
+                  r.formation,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFF7F8C8D),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                child: Text(
+                  r.ufr,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFF7F8C8D),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                child: Text(
+                  r.niveau,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFF7F8C8D),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                child: Text(
+                  r.etudiant.toString(),
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFF7F8C8D),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                child: Text(
+                  r.statut,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFF7F8C8D),
+                  ),
+                ),
+              ),
+            ],
+          ),
+      ],
+    );
+  }
+
+  Widget emploiTemps(final shedule) {
+    return Table(
+      border: TableBorder(
+        horizontalInside: BorderSide(color: Color(0xFFEEEEEE), width: 1),
+        top: BorderSide(color: Color(0xFFEEEEEE)),
+        bottom: BorderSide(color: Color(0xFFEEEEEE)),
+      ),
+      columnWidths: const {0: FlexColumnWidth(2), 1: FlexColumnWidth(1)},
+      children: [
+        TableRow(
+          decoration: BoxDecoration(color: Color(0xFFEEEEEE)),
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 4),
+              child: Text(
+                "Jour",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 4),
               child: Text(
                 "Matiére",
                 style: TextStyle(
@@ -1445,7 +1642,7 @@ class _AdminState extends State<Admin> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 4),
               child: Text(
                 "Heure",
                 style: TextStyle(
@@ -1456,7 +1653,7 @@ class _AdminState extends State<Admin> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 8),
+              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 4),
               child: Text(
                 "Salle",
                 style: TextStyle(

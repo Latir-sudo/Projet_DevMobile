@@ -19,3 +19,19 @@ class Shedule {
     required this.salle,
   });
 }
+
+class Formation {
+  String formation;
+  String ufr;
+  String niveau;
+  double etudiant;
+  String statut;
+
+  Formation({
+    required this.formation,
+    required this.ufr,
+    required this.niveau,
+    required this.etudiant,
+    required this.statut,
+  });
+}
