@@ -45,9 +45,8 @@ class _EspaceEnseignantPageState extends State<EspaceEnseignantPage> {
         children: [
           // Menu de navigation
           menu(
-            currentIndex: _currentIndex, // Ajouter ceci
+            currentIndex: _currentIndex,
             onItemSelected: (index) {
-              // Ajouter ce callback
               setState(() {
                 _currentIndex = index;
               });
@@ -112,7 +111,7 @@ Widget entete({
             ),
           ],
         ),
-        // Icône à droite
+        //
         Positioned(
           right: 0,
           child: IconButton(
@@ -127,11 +126,11 @@ Widget entete({
 
 Widget menu({
   required List<Map<String, dynamic>> items,
-  int currentIndex = 0, // Ajouter ce paramètre
+  int currentIndex = 0,
   Color iconColor = Colors.blueAccent,
   Color textColor = Colors.black87,
-  Color selectedColor = Colors.blue, // Couleur pour l'élément sélectionné
-  Function(int)? onItemSelected, // Callback pour gérer le clic
+  Color selectedColor = Colors.blue,
+  Function(int)? onItemSelected,
 }) {
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 10),
@@ -172,11 +171,10 @@ Widget menu({
                           : FontWeight.normal,
                     ),
                   ),
-                  // Trait bleu en dessous du texte quand sélectionné
+
                   if (isSelected)
                     Positioned(
-                      bottom:
-                          -6, // Ajustez cette valeur pour positionner le trait
+                      bottom: -6,
                       left: 0,
                       right: 0,
                       child: Container(
